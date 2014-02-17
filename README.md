@@ -29,7 +29,7 @@ Create a new MySQL database instance for nxtip, enter the required information i
 
 ### Coin Daemons
 
-Download and run NRS. Enter it's url in src/ctb/nxtip_settings.py (usually http://localhost:7874/nxt)
+Download and run NRS. Enter it's url in `src/ctb/nxtip_settings.py` (usually http://localhost:7874/nxt)
 
 ### Reddit Account
 
