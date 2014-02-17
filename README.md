@@ -17,6 +17,7 @@ The following Python libraries are necessary to run ALTcointip bot:
 * __sqlalchemy__ (http://www.sqlalchemy.org/)
 * __yaml__ (http://pyyaml.org/wiki/PyYAML)
 * __peewee__ (https://github.com/coleifer/peewee)
+* __requests__ (https://github.com/kennethreitz/requests)
 
 You can install `jinja2`, `praw`, `sqlalchemy`, `peewee` and `yaml` using `pip` (Python Package Index tool) or a package manager in your OS. For `pifkoin`, you'll need to copy or symlink its "python" subdirectory to `src/ctb/pifkoin`.
 
