@@ -39,8 +39,6 @@ You should create a dedicated Reddit account for your bot. Initially, Reddit wil
 
 Edit `src/conf/*.yml` and `src/ctb/nxtip_settings.py` specifying necessary settings.
 
-Most configuration options are described inline in provided sample configuration files.
-
 ### Running the Bot
 
 1. Ensure MySQL is running and accepting connections given configured username/password
