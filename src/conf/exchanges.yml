@@ -1,0 +1,40 @@
+bter:
+    enabled: true
+    domain: 'bter.com'
+    https: true
+    urlpaths: ['/api/1/ticker/{THING_FROM}_{THING_TO}']
+    jsonpaths: ['avg']
+    coinlist: ['btc','nxt']
+    fiatlist: ['cny']
+    uppercase: false
+
+blockchaininfo:
+    enabled: true
+    domain: 'blockchain.info'
+    https: true
+    urlpaths: ['/ticker']
+    jsonpaths: ['{THING_TO}.15m']
+    coinlist: ['btc']
+    fiatlist: ['usd']
+    uppercase: true
+
+btce:
+    enabled: true
+    domain: 'btc-e.com'
+    https: true
+    urlpaths: ['/api/2/{THING_FROM}_{THING_TO}/ticker']
+    jsonpaths: ['ticker.avg']
+    coinlist: ['btc']
+    fiatlist: ['usd']
+    uppercase: false
+
+bitstamp:
+    enabled: true
+    domain: 'www.bitstamp.net'
+    https: true
+    urlpaths: ['/api/ticker/']
+    jsonpaths: ['ask']
+    coinlist: ['btc']
+    fiatlist: ['usd']
+    uppercase: false
+

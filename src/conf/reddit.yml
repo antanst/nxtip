@@ -1,0 +1,48 @@
+auth:
+    user: 'nxtip'
+    password: '...'
+
+scan:
+    batch_limit: 1000
+    my_subreddits: true
+    these_subreddits: ["bottesting","nxt"]
+
+help:
+    enabled: true
+    url: 'http://www.reddit.com/r/NXT/comments/1xsf9t/the_nxt_tipping_bot_has_arrived_go_ahead_and_test/'
+
+contact:
+    enabled: true
+    url: 'http://www.reddit.com/message/compose/?to=nxtip'
+
+messages:
+    verified: true
+    pending: false
+    expired: false
+    declined: false
+    sorry: true
+
+redeem:
+    unit: 'usd'
+    multicoin: true
+    min_karma: 150
+    base: 0.1
+    multiplier:
+        link: 0.00005
+        comment: 0.000005
+    maximum: 0.5
+    account: 'nxtip'
+
+banned_users:
+    method: list
+    list: ['nxtip', 'bitcointip', 'altcointip']
+    subreddit: 'mysubreddit'
+
+stats:
+    enabled: false
+    userflair: false
+    subreddit: 'nxt'
+    page: 'stats'
+    url: 'http://www.reddit.com/r/nxt/wiki/stats'
+    page_tips: 'tips'
+    url_tips: 'http://www.reddit.com/r/nxt/wiki/tips'
