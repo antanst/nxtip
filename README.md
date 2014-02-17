@@ -25,7 +25,7 @@ You can install `jinja2`, `praw`, `sqlalchemy`, `peewee` and `yaml` using `pip` 
 
 Create a new MySQL database instance for ALTCoinTip and run included SQL file [altcointip.sql](altcointip.sql) to create necessary tables. Create a MySQL user and grant it all privileges on the database. If you don't like to deal with command-line MySQL, use `phpMyAdmin`.
 
-Create a new MySQL database instance for nxtip, enter the required information in src/ctb/nxtip_settings.py and run _create_nxtip_tables.py to create the necessary tables.
+Create a new MySQL database instance for nxtip, enter the required information in src/ctb/nxtip_settings.py and run `_create_nxtip_tables.py` to create the necessary tables.
 
 ### Coin Daemons
 
