@@ -1,7 +1,7 @@
 # Reddit nxtip bot
 
 This is the source code used for the reddit nxt tipping bot. The bot is based on [ALTCoinTip](https://github.com/vindimy/altcointip)
-with additional Python modules that emulate the behavior of the bitcoind daemon, as far as ALTCoinTip is concerned.
+with additional changes to the core modules and some extra Python modules that emulate the behavior of the bitcoind daemon, as far as ALTCoinTip is concerned.
 
 ## Introduction
 
