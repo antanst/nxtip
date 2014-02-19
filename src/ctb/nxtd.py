@@ -40,18 +40,22 @@ class NXTd(object):
         #http://wiki.nxtcrypto.org/wiki/Creating_Nxt_accounts_for_site_users
         while True:
             key=''.join([chr(random.choice(range(33,127))) for i in range(64)])
-            account=self.nrs_command("getAccountId",{"secretPhrase":key})["accountId"]
-            if self.nrs_command("getAccountPublicKey",{"account":account})=={u'errorCode': 5, u'errorDescription': u'Unknown account'}:
-                break
-            time.sleep(0.5)
+            try:
+                account=self.nrs_command("getAccountId",{"secretPhrase":key})["accountId"]
+                if self.nrs_command("getAccountPublicKey",{"account":account})=={u'errorCode': 5, u'errorDescription': u'Unknown account'}:
+                    break
+                time.sleep(0.5)
+            except:
+                self.logger.error("NRS contact error when creating account. Retrying")
+                time.sleep(10)
         return {"key":key,"account":account}
 
     def _getbalance(self,user):
-        user=User.select().where(User.name==user).get() #self.couch.get("user_%s"%user)["account"]
-        balance=user.balance #self.nrs_command({"requestType":"getBalance","account":account})[conf_type]
+        user=User.select().where(User.name==user).get()
+        balance=user.balance
         return balance
         
-    def getbalance(self,*args): #2nd arg is minconf, ignored
+    def getbalance(self,*args): #2nd arg from altcointip is minconf which we ignore in our case.
         if args:
             _user=args[0]
         else:
@@ -64,6 +68,9 @@ class NXTd(object):
         amount=args[2]
         if user_from.balance<amount:
             return False
+        #group these on a single SQL transaction.
+        #we don't want unexpected inconsistencies
+        #with the user balances, do we?
         with DB.transaction():
             user_from.balance-=amount
             user_to.balance+=amount
@@ -74,12 +81,14 @@ class NXTd(object):
     def sendfrom(self,username_from,account_to,amount,minconf):
         user_from=User.select().where(User.name==username_from).get()
         #round amount to nearest integer,
-        #fractional NXT's are not supported yet.
+        #fractional NXT on-chain transactions
+        #are not supported yet.
         amount=round(amount)
         #check if the user's balance has enough NXT's
         if user_from.balance<(amount+TXFEE):
             return False
-        #ok, withdrawal time! Add the withdrawal.
+        #ok, withdrawal time! Add the unverified
+        #withdrawal record in the SQL database.
         #the TXFEE is included in the withdrawal
         #amount, because it is also subtracted
         #from the user's tipping balance.
@@ -113,17 +122,10 @@ class NXTd(object):
         return True
 
     def getnewaddress(self,username):
-        if username==NXTIP_USER:
-            try:
-                user=User.select().where(User.name==NXTIP_USER).get()
-            except User.DoesNotExist:
-                account={"key":NXTIP_KEY,"account":NXTIP_ACCOUNT}
-                user=User.create(name=NXTIP_USER,key=account["key"],account=account["account"],balance=0)
-            return NXTIP_ACCOUNT
         try:
             user=User.select().where(User.name==username).get()
         except User.DoesNotExist:
-            account=self._new_key_account() #{"key":"..","account":".."}
+            account=self._new_key_account()
             user=User.create(name=username,key=account["key"],account=account["account"],balance=0)
         return user.account
 
